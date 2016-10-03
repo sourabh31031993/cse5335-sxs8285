@@ -1,0 +1,46 @@
+[
+ {
+  	"Letter": "Mexico",
+  	"Freq": 8336599
+  },
+{
+	"Letter": "China",
+	"Freq": 8540121
+},
+{
+	"Letter" : "bangkok",
+	"Freq": 7871900
+},
+{
+	"Letter" : "UKA",
+	"Freq": 7674366
+},
+{
+	"Letter" : "Africa",
+	"Freq": 7012738
+},
+{
+	"Letter" : "Sweden",
+	"Freq" : 5104476
+},
+{
+	"Letter" : "Germany",
+	"Freq" : 5313367
+},
+{
+	"Letter" : "France",
+	"Freq" : 12294193
+},
+{
+	"Letter" : "Spain",
+	"Freq" : 11716620
+},
+{
+	"Letter" : "France",
+	"Freq" : 10356500
+},
+{
+	"Letter" : "Brazil",
+	"Freq" : 10349312
+}
+]

@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <title>ng-cribs</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="http://d3js.org/d3.v2.js"></script>
+
+  </head>
+  <style>
+    table, th , td  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+   }
+    table tr:nth-child(odd) {
+     background-color: #f1f1f1;
+    }
+    table tr:nth-child(even) {
+    background-color: #ffffff;
+    }
+
+    html, body {
+    height: 100%;
+    margin: 50;
+    padding: 50;
+    }
+    #map {
+    height: 400px;
+    width: 600px;
+    }
+
+    .bar{
+      fill: steelblue;
+    }
+
+    .bar:hover{
+      fill: brown;
+    }
+
+  	.axis {
+  	  font: 10px sans-serif;
+  	}
+
+  	.axis path,
+  	.axis line {
+  	  fill: none;
+  	  stroke: #000;
+  	  shape-rendering: crispEdges;
+  	}
+   </style>
+
+  <body ng-app ="ngCribs" ng-controller ="cribsController">
+
+
+
+    <!-- Nav Bar -->
+	  <nav class="navbar navbar-default">
+	    <div class="container-fluid">
+	      <div class="navbar-header">
+	        <a class="navbar-brand" href="#">CSE 5335</a>
+	      </div>
+	    </div>
+	  </nav>
+
+
+
+   <div ng-app ="ngCribs" ng-controller ="cribsController">
+     <div ng-app ="ngCribs" ng-controller ="cribsController">
+
+    <button
+        class="btn btn-primary"
+        ng-click="myFunc()">Click to continue
+     </button>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>Country</th>
+    <th>Longitude</th>
+    <th>Latitude</th>
+    <th>population</th>
+  </tr>
+  <tr ng-repeat ="x in names">
+    <td>{{ x.properties.Name }}</td>
+    <td>{{ x.properties.City }}</td>
+    <td>{{ x.properties.Country }}</td>
+    <td>{{ x.properties.lat }}</td>
+    <td>{{ x.properties.lng }}</td>
+    <td>{{ x.properties.population}}</td>
+  </tr>
+</table>
+
+</div>
+</div>
+
+<!-- MAPS BODY PART -->
+<div id="map-canvas" style="width: 300px; height: 400px"></div>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+
+// When the user clicks, open an infowindow
+var infowindow = new google.maps.InfoWindow();
+function gotoFeature(featureNum) {
+var feature = map.data.getFeatureById(features[featureNum].getId());
+if (!!feature) google.maps.event.trigger(feature, 'changeto', {feature: feature});
+else alert('feature not found!');
+}
+
+function initialize() {
+// Create a simple map.
+features=[];
+map = new google.maps.Map(document.getElementById('map-canvas'), {
+zoom: 4,
+center: {lat: 42.877742, lng: -97.380979}
+});
+google.maps.event.addListener(map,'click',function() {
+  infowindow.close();
+});
+map.data.setStyle({fillOpacity:.8});
+map.data.loadGeoJson(
+'stations.geojson');
+// Load a GeoJSON from the same server as our demo.
+var featureId = 0;
+google.maps.event.addListener(map.data,'addfeature',function(e){
+if(e.feature.getGeometry().getType()==='Polygon'){
+    features.push(e.feature);
+    var bounds=new google.maps.LatLngBounds();
+
+    e.feature.getGeometry().getArray().forEach(function(path){
+
+       path.getArray().forEach(function(latLng){bounds.extend(latLng);})
+
+    });
+    e.feature.setProperty('bounds',bounds);
+    e.feature.setProperty('featureNum',features.length-1);
+
+
+
+  }
+});
+// When the user clicks, open an infowindow
+map.data.addListener('click', function(event) {
+    var myHTML = event.feature.getProperty("description");
+infowindow.setContent("<div style='width:150px; text-align: center;'>"+myHTML+"</div>");
+    infowindow.setPosition(event.feature.getGeometry().get());
+infowindow.setOptions({pixelOffset: new google.maps.Size(0,-30)});
+    infowindow.open(map);
+});
+
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+
+  <!--CHART -->
+  <div id="chart"></div>
+  </body>
+  <!--CHART SCRIPT -->
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+  <script>
+  // set the dimensions of the canvas
+  var margin = {top: 20, right: 20, bottom: 70, left: 40},
+      width = 600 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+
+
+  // set the ranges
+  var x = d3.scale.ordinal().rangeRoundBands([0, width], .05);
+
+  var y = d3.scale.linear().range([height, 0]);
+
+  // define the axis
+  var xAxis = d3.svg.axis()
+      .scale(x)
+      .orient("bottom")
+
+
+  var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left")
+      .tickSize(-width)
+      .tickFormat(function(d) { return Math.round(d / 1e6) + "M"; })
+      .ticks(10);
+
+
+
+  // add the SVG element
+  var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+
+  // load the data
+  d3.json("data.json", function(error, data) {
+
+      data.forEach(function(d) {
+          d.Letter = d.Letter;
+          d.Freq = +d.Freq;
+      });
+
+    // scale the range of the data
+    x.domain(data.map(function(d) { return d.Letter; }));
+    y.domain([0,d3.max(data, function(d) { return d.Freq; })]);
+
+    // add axis
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis)
+      .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", "-.55em")
+        .attr("transform", "rotate(-90)" );
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis)
+      .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 5)
+        .attr("dy", ".71em")
+        .style("text-anchor", "end")
+        .text("Frequency");
+
+
+    // Add bar chart
+    svg.selectAll("bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return x(d.Letter); })
+        .attr("width", x.rangeBand())
+        .attr("y", function(d) { return y(d.Freq); })
+        .attr("height", function(d) { return height - y(d.Freq); });
+
+  });
+
+  </script>
+<!--End of chart script-->
+
+
+
+  <script src ="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap.min.js"></script>
+  <script src ="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+  <!--<script src ="app.js"></script>-->
+
+  <!--MAP script-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
+  <script src="//rawgit.com/angular-ui/angular-google-maps/2.1.5/dist/angular-google-maps.min.js"></script>
+  <!--<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyB-KhL6zCd9jSw60-O1mxvFYhQEQuG2M-o"></script>-->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.5.0/lodash.min.js"></script>
+ <!--END OF MAP SCRIPT-->
+  <script>
+  var app = angular.module('ngCribs',[]);
+      app.controller('cribsController',function($scope,$http){
+       $scope.myFunc = function() {
+       $http.get("stations.geojson").then(function(response) {
+       $scope.names = response.data.features;
+     });
+   }
+});
+</script>
+<!-- END OF MAP controller-->
+</html>

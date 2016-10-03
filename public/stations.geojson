@@ -1,0 +1,232 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "id":0,
+      "type": "Feature",
+      "properties": {
+        "Name": "Alfreds Futterkiste",
+        "City": "Beijing",
+        "Country": "China",
+        "lng":116.397228240967,
+        "lat":39.9074977414405,
+        "population":8540121,
+        "description": "China"
+      },
+      "geometry": {
+        "type": "Point",
+        "title": "China",
+        "coordinates": [
+          116.397228240967,
+          39.9074977414405
+        ]
+      }
+    },
+    {
+      "id":1,
+      "type": "Feature",
+      "properties": {
+        "Name": "Ana Trujillo Emparedados y helados",
+        "City": "México D.F.",
+        "Country": "Mexico",
+        "lng":-99.12766456604,
+        "lat":19.428472427036,
+        "population":8336599,
+        "description": "Mexico"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -99.12766456604,
+          19.428472427036
+        ]
+      }
+    },
+    {
+      "id":2,
+      "type": "Feature",
+      "properties": {
+        "Name": "Antonio Moreno Taquería",
+        "City": "Pataya",
+        "Country": "Bangkok",
+        "lng":100.501444,
+        "lat":13.753979,
+        "population":7871900,
+        "description": "Bangkok"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.501444,
+          13.753979
+        ]
+      }
+    },
+    {
+      "id":3,
+      "type": "Feature",
+      "properties": {
+        "Name": "Around the Horn",
+        "City": "London",
+        "Country": "UK",
+        "lng":51.508530,
+        "lat":-0.076132,
+        "population":7674366,
+        "description": "UK"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          51.508530,
+          -0.076132
+        ]
+      }
+    },
+    {
+      "id":3,
+      "type": "Feature",
+      "properties": {
+        "Name": "B's Beverages",
+        "City": "Egypt",
+        "Country": "Africa",
+        "lng":31.2109300,
+        "lat":30.0080800,
+        "population":7012738,
+        "description": "Egypt"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.2109300,
+          30.0080800
+        ]
+      }
+    },
+    {
+      "id":4,
+      "type": "Feature",
+      "properties": {
+        "Name": "Berglunds snabbköp",
+        "City": "Luleå",
+        "Country": "Sweden",
+        "lng":22.15465,
+        "lat":65.58415,
+        "population":5104476,
+        "description": "Sweden"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          22.15465,
+          65.58415
+        ]
+      }
+    },
+    {
+      "id":5,
+      "type": "Feature",
+      "properties": {
+        "Name": "Blauer See Delikatessen",
+        "City": "Mannheim",
+        "Country": "Germany",
+        "lng": 8.47955,
+        "lat":49.49671,
+        "population":5313367,
+        "description": "Germany"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.47955,
+          49.49671
+        ]
+      }
+    },
+    {
+      "id":6,
+      "type": "Feature",
+      "properties": {
+        "Name": "Blondel père et fils",
+        "City": "Strasbourg",
+        "Country": "France",
+        "lng": 7.74553,
+        "lat":48.58392,
+        "population":12294193,
+        "description": "France"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.74553,
+          48.58392
+        ]
+      }
+    },
+    {
+      "id":7,
+      "type": "Feature",
+      "properties": {
+        "Name": "Bólido Comidas preparadas",
+        "City": "Madrid",
+        "Country": "Spain",
+        "lng":-3.707398,
+        "lat":40.415363,
+        "population":11716620,
+        "description": "Spain"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -3.707398,
+          40.415363
+        ]
+      }
+    },
+    {
+      "id":8,
+      "type": "Feature",
+      "properties": {
+        "Name": "Bon app'",
+        "City": "Marseille",
+        "Country": "France",
+        "lng": 5.38107,
+        "lat":43.29695,
+        "population":10356500,
+        "description": "France"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.38107,
+          43.29695
+        ]
+      }
+    },
+    {
+      "id":9,
+      "type": "Feature",
+      "properties": {
+        "Name": "Comércio Mineiro",
+        "City": "São Paulo",
+        "Country": "Brazil",
+        "lng":-46.625290,
+        "lat":-23.533773,
+        "population":10349312,
+        "description": "Brazil"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -46.625290,
+          -23.533773
+        ]
+      }
+    }
+]
+}
